@@ -10,7 +10,7 @@ A portable pack of **six agent skills** for designing, implementing, and reviewi
 | `web-design-guidelines` | Practical web-interface review against the current public Vercel guidance. |
 | `playwright-cli` | Browser automation using the official Playwright CLI skill. |
 | `awesome-design-md` | Local reference library of 84 DESIGN.md examples. |
-| `image-to-code` | Reconstruct a responsive, accessible design system from a screenshot or mockup. |
+| `image-to-code` | Screenshot-to-interface skill **with the full upstream helper kit** (tokens, taste references, scripts, frameworks, components, and design-token guidance). |
 | `design-workbench` | Orchestrates all five focused skills in one implementation/review workflow. |
 
 ## Install
@@ -29,7 +29,7 @@ By default skills are copied to `~/.agents/skills/`. Set `AGENT_SKILLS_DIR` to i
 AGENT_SKILLS_DIR="$HOME/.claude/skills" ./install.sh
 ```
 
-The installer installs `@playwright/cli`, asks it to install its agent skill globally, and installs Chrome for browser runs. If you do not need browser automation or cannot install Chrome yet, use `./install.sh --no-browser`; the Playwright skill and CLI are still installed, but browser-driven checks will need a browser later.
+The installer preserves any same-named skill directories by backing them up, installs `@playwright/cli`, asks it to install its agent skill globally, and installs Chrome for browser runs. If you do not need browser automation or cannot install Chrome yet, use `./install.sh --no-browser`; the Playwright skill and CLI are still installed, but browser-driven checks will need a browser later.
 
 Then start a new agent session (some agents only discover skills at startup) and ask it to use **Design Workbench**. The focused skills can also be triggered individually.
 
@@ -39,15 +39,15 @@ To validate the checked-out pack without installing anything:
 ./test.sh
 ```
 
-To remove only the six pack skill folders from the selected target:
+To remove the six pack skill folders from the selected target and restore any pre-install copies backed up by the installer:
 
 ```bash
 AGENT_SKILLS_DIR="$HOME/.agents/skills" ./uninstall.sh
 ```
 
-## Important limitations
+## Important notes
 
-- The upstream Image-to-Code repository's full helper kit is **not** included. The included skill has a complete manual/project-native workflow and explicitly does not claim that upstream-only scripts (`npm run verify`, `contrast.py`, etc.) ran. If a project specifically requires those helpers, install the upstream kit separately.
+- The Image-to-Code helper kit is bundled in `skills/image-to-code/kit/` with its upstream MIT license. Some kit checks have their own Node/Python dependency requirements; install those only if needed. A kit-level `npm run verify` does not automatically validate a separate target project.
 - DESIGN.md samples are inspiration, not current brand documentation. Do not copy another company's logo, imagery, text, or distinctive identity.
 - The Vercel guidelines skill fetches current checklist content from its upstream URL at review time. Offline reviews must disclose that the checklist could not be refreshed.
 - Playwright browser installation can require system package permissions. `--no-browser` skips that part.

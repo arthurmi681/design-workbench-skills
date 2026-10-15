@@ -8,7 +8,7 @@
     { "id": "web-design-guidelines", "path": "skills/web-design-guidelines", "source": "https://github.com/vercel-labs/agent-skills/tree/main/skills/web-design-guidelines", "adapter": true },
     { "id": "playwright-cli", "path": "skills/playwright-cli", "source": "https://www.npmjs.com/package/@playwright/cli", "installerInstallsOfficialSkill": true },
     { "id": "awesome-design-md", "path": "skills/awesome-design-md", "source": "https://github.com/VoltAgent/awesome-design-md", "designMdCount": 84 },
-    { "id": "image-to-code", "path": "skills/image-to-code", "source": "https://github.com/plugin87/ux-ui-agent-skills/tree/main/.claude/skills/image-to-code", "upstreamHelperKitIncluded": false },
+    { "id": "image-to-code", "path": "skills/image-to-code", "source": "https://github.com/plugin87/ux-ui-agent-skills", "upstreamHelperKitIncluded": true },
     { "id": "design-workbench", "path": "skills/design-workbench", "coordinates": ["design-taste-frontend", "web-design-guidelines", "playwright-cli", "awesome-design-md", "image-to-code"] }
   ],
   "targetDefault": "~/.agents/skills"

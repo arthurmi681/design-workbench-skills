@@ -11,6 +11,11 @@ for skill in "${skills[@]}"; do
   echo "OK: $skill"
 done
 [ "$(find "$ROOT/skills/awesome-design-md/references/design-md" -name DESIGN.md | wc -l)" -eq 84 ] || { echo 'FAIL: expected 84 DESIGN.md references' >&2; exit 1; }
+kit="$ROOT/skills/image-to-code/kit"
+for item in tokens taste scripts frameworks components .claude/skills/design-tokens/SKILL.md; do
+  [ -e "$kit/$item" ] || { echo "FAIL: missing Image-to-Code kit resource: $item" >&2; exit 1; }
+done
+[ -s "$kit/LICENSE" ] || { echo 'FAIL: missing upstream kit license' >&2; exit 1; }
 bash -n "$ROOT/install.sh" "$ROOT/uninstall.sh" "$ROOT/test.sh"
 
 tmp="$(mktemp -d)"
@@ -41,4 +46,4 @@ AGENT_SKILLS_DIR="$HOME/.agents/skills" "$ROOT/uninstall.sh" >/dev/null
 [ "$(cat "$HOME/.agents/skills/design-taste-frontend/old.txt")" = user-taste-skill ]
 [ "$(cat "$HOME/.agents/skills/playwright-cli/old.txt")" = user-playwright-skill ]
 [ ! -e "$HOME/.agents/skills/design-workbench" ]
-echo 'OK: install/uninstall preserves and restores existing skills; 84 DESIGN.md references present.'
+echo 'OK: install/uninstall preserves and restores existing skills; all 84 DESIGN.md references and Image-to-Code helper kit are present.'
